@@ -114,7 +114,11 @@ range_bar.update_xaxes(showgrid=False)
 range_bar.update_yaxes(showgrid=False)
 
 # Drop down menu
-option = st.selectbox('Choose characteristic:', ('Price', 'Efficiency', 'Range'))
+# option = st.selectbox('Choose characteristic:', ('Price', 'Efficiency', 'Range'))
+
+# Radio Buttons
+option = st.radio(label='Choose characteristic:', options=['Price', 'Efficiency', 'Range'])
+st.write('<style>div.row-widget.stRadio > div{flex-direction:row;}</style>', unsafe_allow_html=True)
 
 if option == 'Price':
     st.plotly_chart(price_bar)
