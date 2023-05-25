@@ -40,6 +40,9 @@ ev['fast_charge_kmh'] = pd.to_numeric(ev['fast_charge_kmh']) # Change fast_charg
 ev = ev.drop_duplicates(subset=['brand', 'model']).reset_index(drop=True)
 
 
+# Centered Title
+st.markdown('<div style="text-align: center:">Price, Efficiency, and Range of EVs by Brand and Body Style</div>', unsafe_allow_html=True)
+
 # Header for Bar Charts
 st.header('Price, Efficiency, and Range of EVs by Brand and Body Style') # Create header
 
