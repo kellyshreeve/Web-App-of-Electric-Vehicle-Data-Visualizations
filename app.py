@@ -66,3 +66,5 @@ price_bar.update_xaxes(showgrid=False) # Turn off x grid
 price_bar.update_yaxes(showgrid=False) # Turn off y grid
 
 st.plotly_chart(price_bar)
+
+
