@@ -38,6 +38,13 @@ ev = ev.drop_duplicates(subset=['brand', 'model']).reset_index(drop=True)
 
 st.header('Price, Efficiency, and Range of EVs by Brand') # Create header
 
+# Create top brands data frame 
+top_brands = ev[(ev['brand']=='Tesla ') | (ev['brand']=='Audi ') | (ev['brand']=='Nissan ') 
+                | (ev['brand']=='Volkswagen ') | (ev['brand']=='Skoda ') | (ev['brand']=='Renault ') 
+                | (ev['brand']=='Porsche ') | (ev['brand']=='BMW ') | (ev['brand']=='Ford ')
+                | (ev['brand']=='Kia ') | (ev['brand']=='Smart ') | (ev['brand']=='Byton ')
+                | (ev['brand']=='Mercedes ') | (ev['brand']=='Hyundai ') | (ev['brand']=='Opel ')] 
+
 # Create a bar chart of average price by brand
 price_bar = px.histogram(top_brands, x='brand', y='price_euro', histfunc='avg', 
                           title='Average Price by Brand of EVs', text_auto='.2s',
