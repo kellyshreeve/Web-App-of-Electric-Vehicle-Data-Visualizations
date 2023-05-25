@@ -136,6 +136,9 @@ elif option == 'Range':
 # Header for by body type
 st.header('By Body Type')
 
+# Create data frame with only top 3 body styles
+suv_hatch_sed = ev[(ev['body_style']=='SUV') | (ev['body_style']=='Hatchback') | (ev['body_style']=='Sedan')]
+
 # Create a histogram of price by body style
 price_hist = px.histogram(suv_hatch_sed, title='Price by Body Style for EVs', x='price_euro', color='body_style', nbins=30,
                           labels={'price_euro':'Price (Euros)', 'count':'Frequency'},
@@ -202,11 +205,11 @@ option_2 = st.selectbox('Choose characteristic:', ('Price', 'Efficiency', 'Range
 
 if option_2 == 'Price':
     st.subheader('Average Price by Body Style')
-    st.plotly_chart(price.hist)
-elif option_2 = 'Efficiency':
+    st.plotly_chart(price_hist)
+elif option_2 == 'Efficiency':
     st.subheader('Average Efficiency by Body Style')
     st.plotly_chart(eff_hist)
-elif option_2 = 'Range':
+elif option_2 == 'Range':
     st.subheader('Average Range by Body Style')
     st.plotly_chart(range_hist)
     
