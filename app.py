@@ -40,6 +40,9 @@ ev = ev.drop_duplicates(subset=['brand', 'model']).reset_index(drop=True)
 # Header for Bar Charts
 st.header('Average Price, Efficiency, and Range of EVs by Brand') # Create header
 
+# Drop down menu
+option = st.selectbox('Choose characteristic', ('Price', 'Efficiency', 'Range'))
+
 # Create top brands data frame 
 top_brands = ev[(ev['brand']=='Tesla ') | (ev['brand']=='Audi ') | (ev['brand']=='Nissan ') 
                 | (ev['brand']=='Volkswagen ') | (ev['brand']=='Skoda ') | (ev['brand']=='Renault ') 
