@@ -54,7 +54,7 @@ top_brands = ev[(ev['brand']=='Tesla ') | (ev['brand']=='Audi ') | (ev['brand']=
 
 # Create a bar chart of average price by brand
 price_bar = px.histogram(top_brands, x='brand', y='price_euro', histfunc='avg', 
-                          title='Average Price by Brand of EVs', text_auto='.2s',
+                          text_auto='.2s',
                           labels={'price_euro':'Price (Euros)', 'brand':'Brand Name'},
                           color_discrete_sequence=[px.colors.qualitative.Plotly[7]],
                           width=800, height=500)
@@ -74,7 +74,7 @@ price_bar.update_yaxes(showgrid=False) # Turn off y grid
 
 # Create bar chart of average efficiency by brand 
 eff_bar = px.histogram(top_brands, x='brand', y='efficiency_whkm', histfunc='avg', 
-                          title='Average Efficiency by Brand of EVs', text_auto='.2s',
+                          text_auto='.2s',
                           labels={'efficiency_whkm':'Efficiency (WhKm)', 'brand':'Brand Name'},
                           color_discrete_sequence=[px.colors.qualitative.Plotly[7]],
                           width=800, height=500)
@@ -96,7 +96,7 @@ eff_bar.update_yaxes(range=[0,250], showgrid=False) # Set y axis range
 
 # Create a bar chart of average range by brand
 range_bar = px.histogram(top_brands, x='brand', y='range_km', histfunc='avg', 
-                          title='Average Range by Brand of EVs', text_auto='.2s',
+                          text_auto='.2s',
                           labels={'range_km':'Range (Km)', 'brand':'Brand Name'},
                           color_discrete_sequence=[px.colors.qualitative.Plotly[7]],
                           width=800, height=500)
@@ -115,9 +115,6 @@ range_bar.update_layout(xaxis={'categoryorder':'array', 'categoryarray':
 range_bar.update_xaxes(showgrid=False)
 range_bar.update_yaxes(showgrid=False)
 
-# Drop down menu
-# option = st.selectbox('Choose characteristic:', ('Price', 'Efficiency', 'Range'))
-
 # Create Header 
 st.header('By Brand')
 
@@ -134,9 +131,88 @@ elif option == 'Efficiency':
 elif option == 'Range':
     st.subheader('Average Range by Brand') # Create header
     st.plotly_chart(range_bar)
+    
+    
+# Header for by body type
+st.header('By Body Type')
+
+# Create a histogram of price by body style
+price_hist = px.histogram(suv_hatch_sed, title='Price by Body Style for EVs', x='price_euro', color='body_style', nbins=30,
+                          labels={'price_euro':'Price (Euros)', 'count':'Frequency'},
+                          color_discrete_sequence=[px.colors.qualitative.Plotly[0],
+                                                   px.colors.qualitative.Plotly[7],
+                                                   px.colors.qualitative.Plotly[9]],
+                          width=800, height=500)
+                                                   
+
+price_hist.update_layout({
+    'plot_bgcolor':'rgba(0, 0, 0, 0)',
+    'paper_bgcolor':'rgba(0, 0, 0, 0)'
+})
+
+price_hist.update_layout(barmode='overlay')
+price_hist.update_traces(opacity=0.7)
+
+price_hist.update_xaxes(showgrid=False)
+price_hist.update_yaxes(showgrid=False)
+
+# Create a histogram of efficiency by body style
+eff_hist = px.histogram(suv_hatch_sed, title='Efficiency by Body Style for EVs', x='efficiency_whkm', color='body_style', nbins=22,
+                          labels={'efficiency_whkm':'Efficiency (WhKm)', 'count':'Frequency'},
+                          color_discrete_sequence=[px.colors.qualitative.Plotly[0],
+                                                   px.colors.qualitative.Plotly[7],
+                                                   px.colors.qualitative.Plotly[9]],
+                          width=800, height=500)
+                                                   
+
+eff_hist.update_layout({
+    'plot_bgcolor':'rgba(0, 0, 0, 0)',
+    'paper_bgcolor':'rgba(0, 0, 0, 0)'
+})
+
+eff_hist.update_layout(barmode='overlay')
+eff_hist.update_traces(opacity=0.7)
+
+eff_hist.update_xaxes(showgrid=False)
+eff_hist.update_yaxes(showgrid=False)
+
+# Create a histogram of range by body style
+range_hist = px.histogram(suv_hatch_sed, title='Range by Body Style for EVs', x='range_km', color='body_style', nbins=25,
+                          labels={'range_km':'Range (Km)', 'count':'Frequency'},
+                          color_discrete_sequence=[px.colors.qualitative.Plotly[0],
+                                                   px.colors.qualitative.Plotly[7],
+                                                   px.colors.qualitative.Plotly[9]],
+                          width=800, height=500)
+                                                   
+
+range_hist.update_layout({
+    'plot_bgcolor':'rgba(0, 0, 0, 0)',
+    'paper_bgcolor':'rgba(0, 0, 0, 0)'
+})
+
+range_hist.update_layout(barmode='overlay')
+range_hist.update_traces(opacity=0.7)
+
+range_hist.update_xaxes(showgrid=False)
+range_hist.update_yaxes(showgrid=False)
+
+
+# Drop down menu
+option_2 = st.selectbox('Choose characteristic:', ('Price', 'Efficiency', 'Range'))
+
+if option_2 == 'Price':
+    st.subheader('Average Price by Body Style')
+    st.plotly_chart(price.hist)
+elif option_2 = 'Efficiency':
+    st.subheader('Average Efficiency by Body Style')
+    st.plotly_chart(eff_hist)
+elif option_2 = 'Range':
+    st.subheader('Average Range by Body Style')
+    st.plotly_chart(range_hist)
+    
 
 # Header for scatter plot 
-st.header('Efficiency by Price')
+st.header('By Price')
 
 # Create a scatter plot of efficiency by price
 price_efficiency = px.scatter(data_frame=ev, title='Efficiency vs Price for EVs', x='price_euro', y='efficiency_whkm', 
