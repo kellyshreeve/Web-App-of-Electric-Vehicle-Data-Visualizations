@@ -39,7 +39,7 @@ ev = ev.drop_duplicates(subset=['brand', 'model']).reset_index(drop=True)
 
 
 # Header for Bar Charts
-st.header('Average Price, Efficiency, and Range of EVs by Brand') # Create header
+st.header('Price, Efficiency, and Range of EVs by Brand and Body Style') # Create header
 
 
 # Create top brands data frame 
