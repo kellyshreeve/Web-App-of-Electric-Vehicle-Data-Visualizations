@@ -37,11 +37,10 @@ ev['fast_charge_kmh'] = pd.to_numeric(ev['fast_charge_kmh']) # Change fast_charg
 
 ev = ev.drop_duplicates(subset=['brand', 'model']).reset_index(drop=True)
 
+
 # Header for Bar Charts
 st.header('Average Price, Efficiency, and Range of EVs by Brand') # Create header
 
-# Drop down menu
-option = st.selectbox('Choose characteristic', ('Price', 'Efficiency', 'Range'))
 
 # Create top brands data frame 
 top_brands = ev[(ev['brand']=='Tesla ') | (ev['brand']=='Audi ') | (ev['brand']=='Nissan ') 
@@ -49,6 +48,7 @@ top_brands = ev[(ev['brand']=='Tesla ') | (ev['brand']=='Audi ') | (ev['brand']=
                 | (ev['brand']=='Porsche ') | (ev['brand']=='BMW ') | (ev['brand']=='Ford ')
                 | (ev['brand']=='Kia ') | (ev['brand']=='Smart ') | (ev['brand']=='Byton ')
                 | (ev['brand']=='Mercedes ') | (ev['brand']=='Hyundai ') | (ev['brand']=='Opel ')] 
+
 
 # Create a bar chart of average price by brand
 price_bar = px.histogram(top_brands, x='brand', y='price_euro', histfunc='avg', 
@@ -69,8 +69,59 @@ price_bar.update_layout(xaxis={'categoryorder':'total descending'}) # Arrange in
 price_bar.update_xaxes(showgrid=False) # Turn off x grid
 price_bar.update_yaxes(showgrid=False) # Turn off y grid
 
-# Display bar chart on website
-st.plotly_chart(price_bar)
+
+# Create bar chart of average efficiency by brand 
+eff_bar = px.histogram(top_brands, x='brand', y='efficiency_whkm', histfunc='avg', 
+                          title='Average Efficiency by Brand of EVs', text_auto='.2s',
+                          labels={'efficiency_whkm':'Efficiency (WhKm)', 'brand':'Brand Name'},
+                          color_discrete_sequence=[px.colors.qualitative.Plotly[7]],
+                          width=800, height=500)
+
+eff_bar.update_layout({
+    'plot_bgcolor':'rgba(0, 0, 0, 0)',
+    'paper_bgcolor':'rgba(0, 0, 0, 0)'
+}) 
+
+eff_bar.update_traces(textfont_size=11, textposition='outside')
+
+eff_bar.update_layout(xaxis={'categoryorder':'array', 'categoryarray':
+    ['Porsche ', 'Audi ', 'Tesla ', 'Mercedes ', 'Byton ', 'Ford ', 'BMW ',
+     'Nissan ', 'Skoda ', 'Hyundai ', 'Kia ', 'Opel ', 'Volkswagen ', 'Renault ', 'Smart ']}) 
+
+eff_bar.update_xaxes(showgrid=False)
+eff_bar.update_yaxes(range=[0,250], showgrid=False) # Set y axis range
+
+
+# Create a bar chart of average range by brand
+range_bar = px.histogram(top_brands, x='brand', y='range_km', histfunc='avg', 
+                          title='Average Range by Brand of EVs', text_auto='.2s',
+                          labels={'range_km':'Range (Km)', 'brand':'Brand Name'},
+                          color_discrete_sequence=[px.colors.qualitative.Plotly[7]],
+                          width=800, height=500)
+
+range_bar.update_layout({
+    'plot_bgcolor':'rgba(0, 0, 0, 0)',
+    'paper_bgcolor':'rgba(0, 0, 0, 0)'
+})
+
+range_bar.update_traces(textfont_size=11, textposition='outside')
+
+range_bar.update_layout(xaxis={'categoryorder':'array', 'categoryarray':
+    ['Porsche ', 'Audi ', 'Tesla ', 'Mercedes ', 'Byton ', 'Ford ', 'BMW ',
+     'Nissan ', 'Skoda ', 'Hyundai ', 'Kia ', 'Opel ', 'Volkswagen ', 'Renault ', 'Smart ']})
+
+range_bar.update_xaxes(showgrid=False)
+range_bar.update_yaxes(showgrid=False)
+
+# Drop down menu
+option = st.selectbox('Choose characteristic:', ('Price', 'Efficiency', 'Range'))
+
+if option == 'Price':
+    st.plotly_chart(price_bar)
+elif option == 'Efficiency':
+    st.plotly_chart(eff_bar)
+elif option == 'Range':
+    st.plotly_chart(range_bar)
 
 # Header for scatter plot 
 st.header('Efficiency by Price')
