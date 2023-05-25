@@ -41,7 +41,7 @@ ev = ev.drop_duplicates(subset=['brand', 'model']).reset_index(drop=True)
 
 
 # Centered Title
-st.markdown('<div style="text-align: center:">Price, Efficiency, and Range of EVs by Brand and Body Style</div>', unsafe_allow_html=True)
+st.markdown('# <div style="text-align: center:">Price, Efficiency, and Range of EVs by Brand and Body Style</div>', unsafe_allow_html=True)
 
 
 # Create top brands data frame 
