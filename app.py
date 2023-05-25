@@ -6,6 +6,8 @@ import numpy as np
 import streamlit as st
 import plotly_express as px
 
+# Set Application Name
+st.set_page_config(page_title='Electric Vehicle Data Visualizations')
 
 # Read in dataset
 url = 'https://raw.githubusercontent.com/kellyshreeve/Web-App-Project/main/ElectricCarData_Clean.csv'
