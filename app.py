@@ -3,8 +3,9 @@
 # Import Libraries
 import pandas as pd 
 import numpy as np
-import plotly_express as px
 import streamlit as st
+import plotly_express as px
+
 
 # Read in dataset
 url = 'https://raw.githubusercontent.com/kellyshreeve/Web-App-Project/main/ElectricCarData_Clean.csv'
