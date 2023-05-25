@@ -37,7 +37,8 @@ ev['fast_charge_kmh'] = pd.to_numeric(ev['fast_charge_kmh']) # Change fast_charg
 
 ev = ev.drop_duplicates(subset=['brand', 'model']).reset_index(drop=True)
 
-st.header('Price, Efficiency, and Range of EVs by Brand') # Create header
+# Header for Bar Charts
+st.header('Average Price, Efficiency, and Range of EVs by Brand') # Create header
 
 # Create top brands data frame 
 top_brands = ev[(ev['brand']=='Tesla ') | (ev['brand']=='Audi ') | (ev['brand']=='Nissan ') 
@@ -65,6 +66,24 @@ price_bar.update_layout(xaxis={'categoryorder':'total descending'}) # Arrange in
 price_bar.update_xaxes(showgrid=False) # Turn off x grid
 price_bar.update_yaxes(showgrid=False) # Turn off y grid
 
+# Display bar chart on website
 st.plotly_chart(price_bar)
 
+# Header for scatter plot 
+st.header('Efficiency by Price')
 
+# Create a scatter plot of efficiency by price
+price_efficiency = px.scatter(data_frame=ev, title='Efficiency vs Price for EVs', x='price_euro', y='efficiency_whkm', 
+           labels={'price_euro':'Price Euro', 'efficiency_whkm':'Efficiency WhKm'},
+           color='brand', width=900, height=500)
+
+price_efficiency.update_layout({
+    'plot_bgcolor':'rgba(0, 0, 0, 0)',
+    'paper_bgcolor':'rgba(0, 0, 0, 0)'
+})
+
+price_efficiency.update_xaxes(range=[0, 250000], showgrid=False)
+price_efficiency.update_yaxes(range=[125, 280], showgrid=False)
+
+# Display scatter plot on website
+st.plotly_chart(price_efficiency)
