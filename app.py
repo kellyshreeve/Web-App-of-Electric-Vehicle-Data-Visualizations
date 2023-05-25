@@ -43,9 +43,6 @@ ev = ev.drop_duplicates(subset=['brand', 'model']).reset_index(drop=True)
 # Centered Title
 st.markdown('<div style="text-align: center:">Price, Efficiency, and Range of EVs by Brand and Body Style</div>', unsafe_allow_html=True)
 
-# Header for Bar Charts
-st.header('Price, Efficiency, and Range of EVs by Brand and Body Style') # Create header
-
 
 # Create top brands data frame 
 top_brands = ev[(ev['brand']=='Tesla ') | (ev['brand']=='Audi ') | (ev['brand']=='Nissan ') 
@@ -121,15 +118,21 @@ range_bar.update_yaxes(showgrid=False)
 # Drop down menu
 # option = st.selectbox('Choose characteristic:', ('Price', 'Efficiency', 'Range'))
 
+# Create Header 
+st.header('By Brand')
+
 # Radio Buttons
 option = st.radio(label='Choose characteristic:', options=['Price', 'Efficiency', 'Range'])
 st.write('<style>div.row-widget.stRadio > div{flex-direction:row;}</style>', unsafe_allow_html=True)
 
 if option == 'Price':
+    st.subheader('Average Price by Brand') # Create header
     st.plotly_chart(price_bar)
 elif option == 'Efficiency':
+    st.subheader('Average Efficiency by Brand') # Create header
     st.plotly_chart(eff_bar)
 elif option == 'Range':
+    st.subheader('Average Range by Brand') # Create header
     st.plotly_chart(range_bar)
 
 # Header for scatter plot 
