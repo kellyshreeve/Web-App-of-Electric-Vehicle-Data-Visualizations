@@ -96,10 +96,10 @@ eff_bar.update_yaxes(range=[0,250], showgrid=False) # Set y axis range
 
 # Create a bar chart of average range by brand
 range_bar = px.histogram(top_brands, x='brand', y='range_km', histfunc='avg', 
-                        title='Average Range' text_auto='.2s',
-                        labels={'range_km':'Range (Km)', 'brand':'Brand Name'},
-                        color_discrete_sequence=[px.colors.qualitative.Plotly[7]],
-                        width=800, height=500)
+                         title='Average Range', text_auto='.2s',
+                         labels={'range_km':'Range (Km)', 'brand':'Brand Name'},
+                         color_discrete_sequence=[px.colors.qualitative.Plotly[7]],
+                         width=800, height=500)
 
 range_bar.update_layout({
     'plot_bgcolor':'rgba(0, 0, 0, 0)',
@@ -123,13 +123,10 @@ option = st.radio(label='Choose characteristic:', options=['Price', 'Efficiency'
 st.write('<style>div.row-widget.stRadio > div{flex-direction:row;}</style>', unsafe_allow_html=True)
 
 if option == 'Price':
-    st.subheader('Average Price') # Create header
     st.plotly_chart(price_bar)
 elif option == 'Efficiency':
-    st.subheader('Average Efficiency') # Create header
     st.plotly_chart(eff_bar)
 elif option == 'Range':
-    st.subheader('Average Range') # Create header
     st.plotly_chart(range_bar)
     
     
@@ -214,21 +211,21 @@ option_2 = st.selectbox('Choose characteristic:', ('Price', 'Efficiency', 'Range
 #     st.plotly_chart(range_hist)
 
 if option_2 == 'Price':
-    st.subheader('Price by Body Style')
+    title = 'Price'
     x_var = 'price_euro'
     label = 'Price (Euros)'
 elif option_2 == 'Efficiency':
-    st.subheader('Efficiency by Body Style')
+    title = 'Efficiency'
     x_var = 'efficiency_whkm'
     label = 'Efficiency (WhKm)'
 elif option_2 == 'Range':
-    st.subheader('Range by Body Style'):
+    title = 'Range'
     x_var = 'range_km'
     label = 'Range (Km)'
 
 # Create a histogram of price by body style
 price_hist = px.histogram(suv_hatch_sed, x=x_var, color='body_style', nbins=30,
-                          labels={x_var:label},
+                          title=f'{title} by Body Style', labels={x_var:label},
                           color_discrete_sequence=[px.colors.qualitative.Plotly[0],
                                                    px.colors.qualitative.Plotly[7],
                                                    px.colors.qualitative.Plotly[9]],
