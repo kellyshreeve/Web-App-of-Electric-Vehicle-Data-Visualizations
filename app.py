@@ -209,22 +209,23 @@ option_2 = st.selectbox('Choose characteristic:', ('Price', 'Efficiency', 'Range
 #     st.subheader('Range by Body Style')
 #     st.plotly_chart(range_hist)
 
-if option_2 == 'Price':
-    title = 'Price'
-    x_var = 'price_euro'
-    label = 'Price (Euros)'
-elif option_2 == 'Efficiency':
-    title = 'Efficiency'
-    x_var = 'efficiency_whkm'
-    label = 'Efficiency (WhKm)'
-elif option_2 == 'Range':
-    title = 'Range'
-    x_var = 'range_km'
-    label = 'Range (Km)'
+x_value = (option_2=='Price' and 'price_euro') or (option_2=='Efficiency' and 'efficiency_whkm') or (option_2=='Range' and 'range_km')
+
+# if option_2 == 'Price':
+#     title = 'Price'
+#     x_var = 'price_euro'
+#     label = 'Price (Euros)'
+# elif option_2 == 'Efficiency':
+#     title = 'Efficiency'
+#     x_var = 'efficiency_whkm'
+#     label = 'Efficiency (WhKm)'
+# elif option_2 == 'Range':
+#     title = 'Range'
+#     x_var = 'range_km'
+#     label = 'Range (Km)'
 
 # Create a histogram of price by body style
 price_hist = px.histogram(suv_hatch_sed, x=x_var, color='body_style', nbins=30,
-                          title=f'{title} by Body Style', labels={x_var:label},
                           color_discrete_sequence=[px.colors.qualitative.Plotly[0],
                                                    px.colors.qualitative.Plotly[7],
                                                    px.colors.qualitative.Plotly[9]],
