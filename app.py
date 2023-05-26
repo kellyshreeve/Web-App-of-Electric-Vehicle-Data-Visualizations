@@ -243,7 +243,7 @@ price_hist.update_traces(opacity=0.7)
 price_hist.update_xaxes(showgrid=False)
 price_hist.update_yaxes(showgrid=False)
 
-price_hist.show()
+st.plotly_chart(price_hist)
 
 # Create a histogram of price by body style
 # price_hist = px.histogram(suv_hatch_sed, x=x_value, color='body_style', nbins=30,
