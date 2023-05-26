@@ -6,6 +6,7 @@ import numpy as np
 import streamlit as st
 import plotly_express as px
 
+## READ AND CLEAN DATA
 # Set Application Name
 st.set_page_config(page_title='Electric Vehicle Data Visualizations')
 
@@ -39,11 +40,6 @@ ev['fast_charge_kmh'] = pd.to_numeric(ev['fast_charge_kmh']) # Change fast_charg
 
 ev = ev.drop_duplicates(subset=['brand', 'model']).reset_index(drop=True)
 
-
-# Centered Title
-# st.markdown('# <div style="text-align: center:">Price, Efficiency, and Range of EVs by Brand and Body Style</div>', unsafe_allow_html=True)
-
-
 # Create top brands data frame 
 top_brands = ev[(ev['brand']=='Tesla ') | (ev['brand']=='Audi ') | (ev['brand']=='Nissan ') 
                 | (ev['brand']=='Volkswagen ') | (ev['brand']=='Skoda ') | (ev['brand']=='Renault ') 
@@ -52,6 +48,10 @@ top_brands = ev[(ev['brand']=='Tesla ') | (ev['brand']=='Audi ') | (ev['brand']=
                 | (ev['brand']=='Mercedes ') | (ev['brand']=='Hyundai ') | (ev['brand']=='Opel ')] 
 
 
+## CREATE HEADER
+st.header('Price, Efficiency, and Range of Electric Vehicles by Brand and by Body Style')
+
+## CREATE BAR CHARTS 
 # Create a bar chart of average price by brand
 price_bar = px.histogram(top_brands, x='brand', y='price_euro', histfunc='avg', 
                           title='Average Price', text_auto='.2s',
@@ -70,7 +70,6 @@ price_bar.update_layout(xaxis={'categoryorder':'total descending'}) # Arrange in
 
 price_bar.update_xaxes(showgrid=False) # Turn off x grid
 price_bar.update_yaxes(showgrid=False) # Turn off y grid
-
 
 # Create bar chart of average efficiency by brand 
 eff_bar = px.histogram(top_brands, x='brand', y='efficiency_whkm', histfunc='avg', 
@@ -93,8 +92,7 @@ eff_bar.update_layout(xaxis={'categoryorder':'array', 'categoryarray':
 eff_bar.update_xaxes(showgrid=False)
 eff_bar.update_yaxes(range=[0,250], showgrid=False) # Set y axis range
 
-
-# Create a bar chart of average range by brand
+# Create bar chart of average range by brand
 range_bar = px.histogram(top_brands, x='brand', y='range_km', histfunc='avg', 
                          title='Average Range', text_auto='.2s',
                          labels={'range_km':'Range (Km)', 'brand':'Brand Name'},
@@ -129,7 +127,8 @@ elif option == 'Efficiency':
 elif option == 'Range':
     st.plotly_chart(range_bar)
     
-    
+
+# CREATE HISTOGRAMS
 # Header for body style
 st.header('By Body Style')
 
@@ -197,7 +196,7 @@ suv_hatch_sed = ev[(ev['body_style']=='SUV') | (ev['body_style']=='Hatchback') |
 # range_hist.update_yaxes(showgrid=False)
 
 
-# Drop down menu
+# Drop down menu 
 option_2 = st.selectbox('Choose characteristic:', ('Price', 'Efficiency', 'Range'))
 
 # if option_2 == 'Price':
