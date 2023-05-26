@@ -94,7 +94,7 @@ eff_bar.update_yaxes(range=[0,250], showgrid=False) # Set y axis range
 
 # Create bar chart of average range by brand
 range_bar = px.histogram(top_brands, x='brand', y='range_km', histfunc='avg', 
-                         title='Average Range', text_auto='.2s',
+                         title='Average Range by Brand', text_auto='.2s',
                          labels={'range_km':'Range (Km)', 'brand':'Brand Name'},
                          color_discrete_sequence=[px.colors.qualitative.Plotly[7]],
                          width=800, height=500)
@@ -224,7 +224,8 @@ x_label = (option_2=='Price' and 'Price (Euros)') or (option_2=='Efficiency' and
 #     label = 'Range (Km)'
 
 # Create a histogram of price by body style
-price_hist = px.histogram(suv_hatch_sed, title=f'{option_2} by Body Style for EVs', x=x_value, color='body_style', nbins=25,
+price_hist = px.histogram(suv_hatch_sed, title=f'{option_2} by Body Style', x=x_value, color='body_style', 
+                          nbins=25, label={x_value:x_label},
                           color_discrete_sequence=[px.colors.qualitative.Plotly[0],
                                                    px.colors.qualitative.Plotly[7],
                                                    px.colors.qualitative.Plotly[9]],
