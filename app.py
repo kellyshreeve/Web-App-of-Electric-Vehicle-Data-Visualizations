@@ -225,12 +225,13 @@ x_value = (option_2=='Price' and 'price_euro') or (option_2=='Efficiency' and 'e
 #     label = 'Range (Km)'
 
 # Create a histogram of price by body style
-price_hist = px.histogram(suv_hatch_sed, x=x_value, color='body_style', nbins=30,
+price_hist = px.histogram(suv_hatch_sed, title='by Body Style for EVs', x=x_value, color='body_style', nbins=30,
                           color_discrete_sequence=[px.colors.qualitative.Plotly[0],
                                                    px.colors.qualitative.Plotly[7],
                                                    px.colors.qualitative.Plotly[9]],
                           width=800, height=500)
                                                    
+
 price_hist.update_layout({
     'plot_bgcolor':'rgba(0, 0, 0, 0)',
     'paper_bgcolor':'rgba(0, 0, 0, 0)'
@@ -241,6 +242,26 @@ price_hist.update_traces(opacity=0.7)
 
 price_hist.update_xaxes(showgrid=False)
 price_hist.update_yaxes(showgrid=False)
+
+price_hist.show()
+
+# Create a histogram of price by body style
+# price_hist = px.histogram(suv_hatch_sed, x=x_value, color='body_style', nbins=30,
+#                           color_discrete_sequence=[px.colors.qualitative.Plotly[0],
+#                                                    px.colors.qualitative.Plotly[7],
+#                                                    px.colors.qualitative.Plotly[9]],
+#                           width=800, height=500)
+                                                   
+# price_hist.update_layout({
+#     'plot_bgcolor':'rgba(0, 0, 0, 0)',
+#     'paper_bgcolor':'rgba(0, 0, 0, 0)'
+# })
+
+# price_hist.update_layout(barmode='overlay')
+# price_hist.update_traces(opacity=0.7)
+
+# price_hist.update_xaxes(showgrid=False)
+# price_hist.update_yaxes(showgrid=False)
 
 # Header for scatter plot 
 st.header('By Price')
