@@ -225,7 +225,7 @@ x_value = (option_2=='Price' and 'price_euro') or (option_2=='Efficiency' and 'e
 #     label = 'Range (Km)'
 
 # Create a histogram of price by body style
-price_hist = px.histogram(suv_hatch_sed, x=x_var, color='body_style', nbins=30,
+price_hist = px.histogram(suv_hatch_sed, x=x_value, color='body_style', nbins=30,
                           color_discrete_sequence=[px.colors.qualitative.Plotly[0],
                                                    px.colors.qualitative.Plotly[7],
                                                    px.colors.qualitative.Plotly[9]],
