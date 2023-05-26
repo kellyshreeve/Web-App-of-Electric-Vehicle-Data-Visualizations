@@ -54,7 +54,7 @@ top_brands = ev[(ev['brand']=='Tesla ') | (ev['brand']=='Audi ') | (ev['brand']=
 
 # Create a bar chart of average price by brand
 price_bar = px.histogram(top_brands, x='brand', y='price_euro', histfunc='avg', 
-                          text_auto='.2s',
+                          title='Average Price', text_auto='.2s',
                           labels={'price_euro':'Price (Euros)', 'brand':'Brand Name'},
                           color_discrete_sequence=[px.colors.qualitative.Plotly[7]],
                           width=800, height=500)
@@ -74,7 +74,7 @@ price_bar.update_yaxes(showgrid=False) # Turn off y grid
 
 # Create bar chart of average efficiency by brand 
 eff_bar = px.histogram(top_brands, x='brand', y='efficiency_whkm', histfunc='avg', 
-                          text_auto='.2s',
+                          title='Average efficiency', text_auto='.2s',
                           labels={'efficiency_whkm':'Efficiency (WhKm)', 'brand':'Brand Name'},
                           color_discrete_sequence=[px.colors.qualitative.Plotly[7]],
                           width=800, height=500)
@@ -96,10 +96,10 @@ eff_bar.update_yaxes(range=[0,250], showgrid=False) # Set y axis range
 
 # Create a bar chart of average range by brand
 range_bar = px.histogram(top_brands, x='brand', y='range_km', histfunc='avg', 
-                          text_auto='.2s',
-                          labels={'range_km':'Range (Km)', 'brand':'Brand Name'},
-                          color_discrete_sequence=[px.colors.qualitative.Plotly[7]],
-                          width=800, height=500)
+                        title='Average Range' text_auto='.2s',
+                        labels={'range_km':'Range (Km)', 'brand':'Brand Name'},
+                        color_discrete_sequence=[px.colors.qualitative.Plotly[7]],
+                        width=800, height=500)
 
 range_bar.update_layout({
     'plot_bgcolor':'rgba(0, 0, 0, 0)',
