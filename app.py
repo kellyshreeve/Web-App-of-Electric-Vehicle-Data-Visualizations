@@ -180,7 +180,7 @@ y_label_scat = (y_axis=='Price' and 'Price (Euros)') or (y_axis=='Efficiency' an
 # Create a scatter plot of efficiency by price
 price_efficiency = px.scatter(data_frame=ev, title=f'{y_axis} vs {x_axis}', x=x_value_scat, y=y_value_scat, 
            labels={x_value_scat:x_label_scat, y_value_scat:y_label_scat},
-           color='brand', width=900, height=500)
+           color='brand', width=900, height=500, hover_data=['model'])
 
 price_efficiency.update_layout({
     'plot_bgcolor':'rgba(0, 0, 0, 0)',
