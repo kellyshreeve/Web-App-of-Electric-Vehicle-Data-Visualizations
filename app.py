@@ -138,23 +138,12 @@ suv_hatch_sed = ev[(ev['body_style']=='SUV') | (ev['body_style']=='Hatchback') |
 # Drop down menu 
 option_2 = st.selectbox('Choose characteristic:', ('Price', 'Efficiency', 'Range'))
 
-# x_value = (option_2=='Price' and 'price_euro') or (option_2=='Efficiency' and 'efficiency_whkm') or (option_2=='Range' and 'range_km')
-# x_label = (option_2=='Price' and 'Price (Euros)') or (option_2=='Efficiency' and 'Efficiency (WhKm)') or (option_2=='Range' and 'Range (Km)')
+x_value_hist = (option_2=='Price' and 'price_euro') or (option_2=='Efficiency' and 'efficiency_whkm') or (option_2=='Range' and 'range_km')
+x_label_hist = (option_2=='Price' and 'Price (Euros)') or (option_2=='Efficiency' and 'Efficiency (WhKm)') or (option_2=='Range' and 'Range (Km)')
 
-
-if option_2 == 'Price':
-    x_value = 'price_euro'
-    x_label = 'Price (Euros)'
-elif option_2 == 'Efficiency':
-    x_value = 'efficiency_whkm'
-    x_label = 'Efficiency (WhKm)'
-elif option_2 == 'Range':
-    x_value = 'range_km'
-    x_label = 'Range (Km)'
-
-# Create a histograms by body style
-body_hist = px.histogram(suv_hatch_sed, title=f'{option_2} by Body Style', x=x_value, color='body_style', 
-                          nbins=25, labels={x_value:x_label},
+# Create histograms by body style
+body_hist = px.histogram(suv_hatch_sed, title=f'{option_2} by Body Style', x=x_value_hist, color='body_style', 
+                          nbins=25, labels={x_value_hist:x_label_hist},
                           color_discrete_sequence=[px.colors.qualitative.Plotly[0],
                                                    px.colors.qualitative.Plotly[7],
                                                    px.colors.qualitative.Plotly[9]],
@@ -195,9 +184,18 @@ st.plotly_chart(body_hist)
 # Header for scatter plot 
 st.subheader('By Price')
 
+x_axis = st.selectbox('X Axis:', ('Price', 'Efficiency', 'Range'))
+y_axis = st.selectbox('Y Axis:', ('Price', 'Efficiency', 'Range'))
+
+x_value_scat = (x_axis=='Price' and 'price_euro') or (x_axis=='Efficiency' and 'efficiency_whkm') or (x_axis=='Range' and 'range_km')
+x_label_scat = (x_axis=='Price' and 'Price (Euros)') or (x_axis=='Efficiency' and 'Efficiency (WhKm)') or (x_axis=='Range' and 'Range (Km)')
+
+y_value_scat = (y_axis=='Price' and 'price_euro') or (y_axis=='Efficiency' and 'efficiency_whkm') or (y_axis=='Range' and 'range_km')
+y_label_scat = (y_axis=='Price' and 'Price (Euros)') or (y_axis=='Efficiency' and 'Efficiency (WhKm)') or (y_axis=='Range' and 'Range (Km)')
+
 # Create a scatter plot of efficiency by price
-price_efficiency = px.scatter(data_frame=ev, title='Efficiency vs Price for EVs', x='price_euro', y='efficiency_whkm', 
-           labels={'price_euro':'Price Euro', 'efficiency_whkm':'Efficiency WhKm'},
+price_efficiency = px.scatter(data_frame=ev, title=f'{y_axis} vs {x_axis}', x=x_value_scat, y=y_value_scat, 
+           labels={x_value_scat:x_label_scat, y_value_scat:y_label_scat},
            color='brand', width=900, height=500)
 
 price_efficiency.update_layout({
