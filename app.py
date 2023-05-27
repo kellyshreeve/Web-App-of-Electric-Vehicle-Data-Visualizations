@@ -163,29 +163,13 @@ body_hist.update_yaxes(showgrid=False)
 
 st.plotly_chart(body_hist)
 
-# Create a histogram of price by body style
-# price_hist = px.histogram(suv_hatch_sed, x=x_value, color='body_style', nbins=30,
-#                           color_discrete_sequence=[px.colors.qualitative.Plotly[0],
-#                                                    px.colors.qualitative.Plotly[7],
-#                                                    px.colors.qualitative.Plotly[9]],
-#                           width=800, height=500)
-                                                   
-# price_hist.update_layout({
-#     'plot_bgcolor':'rgba(0, 0, 0, 0)',
-#     'paper_bgcolor':'rgba(0, 0, 0, 0)'
-# })
-
-# price_hist.update_layout(barmode='overlay')
-# price_hist.update_traces(opacity=0.7)
-
-# price_hist.update_xaxes(showgrid=False)
-# price_hist.update_yaxes(showgrid=False)
-
+# CREATE SCATTER PLOTS
 # Header for scatter plot 
 st.subheader('By Price')
 
+# Axis Menus for scatter plot
 x_axis = st.selectbox('X Axis:', ('Price', 'Efficiency', 'Range'))
-y_axis = st.selectbox('Y Axis:', ('Price', 'Efficiency', 'Range'))
+y_axis = st.selectbox('Y Axis:', ('Efficiency', 'Range'))
 
 x_value_scat = (x_axis=='Price' and 'price_euro') or (x_axis=='Efficiency' and 'efficiency_whkm') or (x_axis=='Range' and 'range_km')
 x_label_scat = (x_axis=='Price' and 'Price (Euros)') or (x_axis=='Efficiency' and 'Efficiency (WhKm)') or (x_axis=='Range' and 'Range (Km)')
@@ -203,8 +187,8 @@ price_efficiency.update_layout({
     'paper_bgcolor':'rgba(0, 0, 0, 0)'
 })
 
-price_efficiency.update_xaxes(range=[0, 250000], showgrid=False)
-price_efficiency.update_yaxes(range=[125, 280], showgrid=False)
+price_efficiency.update_xaxes(showgrid=False)
+price_efficiency.update_yaxes(showgrid=False)
 
 # Display scatter plot on website
 st.plotly_chart(price_efficiency)
