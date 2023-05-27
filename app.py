@@ -138,19 +138,19 @@ suv_hatch_sed = ev[(ev['body_style']=='SUV') | (ev['body_style']=='Hatchback') |
 # Drop down menu 
 option_2 = st.selectbox('Choose characteristic:', ('Price', 'Efficiency', 'Range'))
 
-x_value = (option_2=='Price' and 'price_euro') or (option_2=='Efficiency' and 'efficiency_whkm') or (option_2=='Range' and 'range_km')
-x_label = (option_2=='Price' and 'Price (Euros)') or (option_2=='Efficiency' and 'Efficiency (WhKm)') or (option_2=='Range' and 'Range (Km)')
+# x_value = (option_2=='Price' and 'price_euro') or (option_2=='Efficiency' and 'efficiency_whkm') or (option_2=='Range' and 'range_km')
+# x_label = (option_2=='Price' and 'Price (Euros)') or (option_2=='Efficiency' and 'Efficiency (WhKm)') or (option_2=='Range' and 'Range (Km)')
 
 
-# if option_2 == 'Price':
-#     x_value = 'price_euro'
-#     x_label = 'Price (Euros)'
-# elif option_2 == 'Efficiency':
-#     x_value = 'efficiency_whkm'
-#     x_label = 'Efficiency (WhKm)'
-# elif option_2 == 'Range':
-#     x_value = 'range_km'
-#     x_label = 'Range (Km)'
+if option_2 == 'Price':
+    x_value = 'price_euro'
+    x_label = 'Price (Euros)'
+elif option_2 == 'Efficiency':
+    x_value = 'efficiency_whkm'
+    x_label = 'Efficiency (WhKm)'
+elif option_2 == 'Range':
+    x_value = 'range_km'
+    x_label = 'Range (Km)'
 
 # Create a histograms by body style
 body_hist = px.histogram(suv_hatch_sed, title=f'{option_2} by Body Style', x=x_value, color='body_style', 
