@@ -135,115 +135,44 @@ st.subheader('By Body Style')
 # Create data frame with only top 3 body styles
 suv_hatch_sed = ev[(ev['body_style']=='SUV') | (ev['body_style']=='Hatchback') | (ev['body_style']=='Sedan')]
 
-# # Create a histogram of price by body style
-# price_hist = px.histogram(suv_hatch_sed, x='price_euro', color='body_style', nbins=30,
-#                           labels={'price_euro':'Price (Euros)', 'count':'Frequency'},
-#                           color_discrete_sequence=[px.colors.qualitative.Plotly[0],
-#                                                    px.colors.qualitative.Plotly[7],
-#                                                    px.colors.qualitative.Plotly[9]],
-#                           width=800, height=500)
-                                                   
-
-# price_hist.update_layout({
-#     'plot_bgcolor':'rgba(0, 0, 0, 0)',
-#     'paper_bgcolor':'rgba(0, 0, 0, 0)'
-# })
-
-# price_hist.update_layout(barmode='overlay')
-# price_hist.update_traces(opacity=0.7)
-
-# price_hist.update_xaxes(showgrid=False)
-# price_hist.update_yaxes(showgrid=False)
-
-# # Create a histogram of efficiency by body style
-# eff_hist = px.histogram(suv_hatch_sed, x='efficiency_whkm', color='body_style', nbins=22,
-#                           labels={'efficiency_whkm':'Efficiency (WhKm)', 'count':'Frequency'},
-#                           color_discrete_sequence=[px.colors.qualitative.Plotly[0],
-#                                                    px.colors.qualitative.Plotly[7],
-#                                                    px.colors.qualitative.Plotly[9]],
-#                           width=800, height=500)
-                                                   
-
-# eff_hist.update_layout({
-#     'plot_bgcolor':'rgba(0, 0, 0, 0)',
-#     'paper_bgcolor':'rgba(0, 0, 0, 0)'
-# })
-
-# eff_hist.update_layout(barmode='overlay')
-# eff_hist.update_traces(opacity=0.7)
-
-# eff_hist.update_xaxes(showgrid=False)
-# eff_hist.update_yaxes(showgrid=False)
-
-# Create a histogram of range by body style
-# range_hist = px.histogram(suv_hatch_sed, x='range_km', color='body_style', nbins=25,
-                        #   labels={'range_km':'Range (Km)', 'count':'Frequency'},
-                        #   color_discrete_sequence=[px.colors.qualitative.Plotly[0],
-                        #                            px.colors.qualitative.Plotly[7],
-                        #                            px.colors.qualitative.Plotly[9]],
-                        #   width=800, height=500)
-                                                   
-
-# range_hist.update_layout({
-#     'plot_bgcolor':'rgba(0, 0, 0, 0)',
-#     'paper_bgcolor':'rgba(0, 0, 0, 0)'
-# })
-
-# range_hist.update_layout(barmode='overlay')
-# range_hist.update_traces(opacity=0.7)
-
-# range_hist.update_xaxes(showgrid=False)
-# range_hist.update_yaxes(showgrid=False)
-
-
 # Drop down menu 
 option_2 = st.selectbox('Choose characteristic:', ('Price', 'Efficiency', 'Range'))
-
-# if option_2 == 'Price':
-#     st.subheader('Price by Body Style')
-#     st.plotly_chart(price_hist)
-# elif option_2 == 'Efficiency':
-#     st.subheader('Efficiency by Body Style')
-#     st.plotly_chart(eff_hist)
-# elif option_2 == 'Range':
-#     st.subheader('Range by Body Style')
-#     st.plotly_chart(range_hist)
 
 x_value = (option_2=='Price' and 'price_euro') or (option_2=='Efficiency' and 'efficiency_whkm') or (option_2=='Range' and 'range_km')
 x_label = (option_2=='Price' and 'Price (Euros)') or (option_2=='Efficiency' and 'Efficiency (WhKm)') or (option_2=='Range' and 'Range (Km)')
 
 
 # if option_2 == 'Price':
-#     x_var = 'price_euro'
-#     label = 'Price (Euros)'
+#     x_value = 'price_euro'
+#     x_label = 'Price (Euros)'
 # elif option_2 == 'Efficiency':
-#     x_var = 'efficiency_whkm'
-#     label = 'Efficiency (WhKm)'
+#     x_value = 'efficiency_whkm'
+#     x_label = 'Efficiency (WhKm)'
 # elif option_2 == 'Range':
-#     x_var = 'range_km'
-#     label = 'Range (Km)'
+#     x_value = 'range_km'
+#     x_label = 'Range (Km)'
 
-# Create a histogram of price by body style
-price_hist = px.histogram(suv_hatch_sed, title=f'{option_2} by Body Style', x=x_value, color='body_style', 
-                          nbins=25, label={x_value:x_label},
+# Create a histograms by body style
+body_hist = px.histogram(suv_hatch_sed, title=f'{option_2} by Body Style', x=x_value, color='body_style', 
+                          nbins=25, labels={x_value:x_label},
                           color_discrete_sequence=[px.colors.qualitative.Plotly[0],
                                                    px.colors.qualitative.Plotly[7],
                                                    px.colors.qualitative.Plotly[9]],
                           width=800, height=500)
                                                    
 
-price_hist.update_layout({
+body_hist.update_layout({
     'plot_bgcolor':'rgba(0, 0, 0, 0)',
     'paper_bgcolor':'rgba(0, 0, 0, 0)'
 })
 
-price_hist.update_layout(barmode='overlay')
-price_hist.update_traces(opacity=0.7)
+body_hist.update_layout(barmode='overlay')
+body_hist.update_traces(opacity=0.7)
 
-price_hist.update_xaxes(showgrid=False)
-price_hist.update_yaxes(showgrid=False)
+body_hist.update_xaxes(showgrid=False)
+body_hist.update_yaxes(showgrid=False)
 
-st.plotly_chart(price_hist)
+st.plotly_chart(body_hist)
 
 # Create a histogram of price by body style
 # price_hist = px.histogram(suv_hatch_sed, x=x_value, color='body_style', nbins=30,
