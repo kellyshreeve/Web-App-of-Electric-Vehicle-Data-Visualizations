@@ -168,8 +168,8 @@ st.plotly_chart(body_hist)
 st.subheader('By Price')
 
 # Axis Menus for scatter plot
-x_axis = st.selectbox('X Axis:', ('Price', 'Efficiency', 'Range'))
-y_axis = st.selectbox('Y Axis:', ('Efficiency', 'Range'))
+x_axis = st.selectbox('X Axis:', ('Efficiency', 'Range', 'Price'))
+y_axis = st.selectbox('Y Axis:', ('Efficiency', 'Range', 'Price'))
 
 x_value_scat = (x_axis=='Price' and 'price_euro') or (x_axis=='Efficiency' and 'efficiency_whkm') or (x_axis=='Range' and 'range_km')
 x_label_scat = (x_axis=='Price' and 'Price (Euros)') or (x_axis=='Efficiency' and 'Efficiency (WhKm)') or (x_axis=='Range' and 'Range (Km)')
