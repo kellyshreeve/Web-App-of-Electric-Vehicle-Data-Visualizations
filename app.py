@@ -76,10 +76,10 @@ price_bar.update_yaxes(showgrid=False) # Turn off y grid
 
 # Create bar chart of average efficiency by brand 
 eff_bar = px.histogram(top_brands, x='brand', y='efficiency_whkm', histfunc='avg', 
-                          title='Average efficiency by Brand', text_auto='.2s',
-                          labels={'efficiency_whkm':'Efficiency (WhKm)', 'brand':'Brand Name'},
-                          color_discrete_sequence=[px.colors.qualitative.Plotly[7]],
-                          width=800, height=500)
+                        title='Average efficiency by Brand', text_auto='.2s',
+                        labels={'efficiency_whkm':'Efficiency (WhKm)', 'brand':'Brand Name'},
+                        color_discrete_sequence=[px.colors.qualitative.Plotly[7]],
+                        width=800, height=500)
 
 eff_bar.update_layout({
     'plot_bgcolor':'rgba(0, 0, 0, 0)',
