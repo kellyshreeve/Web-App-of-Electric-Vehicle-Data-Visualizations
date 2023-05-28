@@ -52,7 +52,7 @@ top_brands = ev[(ev['brand']=='Tesla ') | (ev['brand']=='Audi ') | (ev['brand']=
 st.header('Price, Efficiency, and Range of Electric Vehicles')
 
 # Create Text
-st.text('Welcome to the electric vehicle data visualization page. The graphics on this site \nwere created from data on the 103 top electric vehicles on the market. They display \nthe differences in price, efficiency, and range of electric vehicles between \nbrands, between body style, and how prie is related to efficiency and range on the \nelectric vehicle market today.')
+st.text('Welcome to the electric vehicle data visualization page! Click the buttons \nand toggle the colors to see how the cars compare.')
 
 ## CREATE BAR CHARTS 
 # Create a bar chart of average price by brand
@@ -193,3 +193,5 @@ price_efficiency.update_yaxes(showgrid=False)
 
 # Display scatter plot on website
 st.plotly_chart(price_efficiency)
+
+st.text('Graphics on this site were created from data on the 103 top electric \nvehicles on the market today.')
