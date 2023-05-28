@@ -52,7 +52,7 @@ top_brands = ev[(ev['brand']=='Tesla ') | (ev['brand']=='Audi ') | (ev['brand']=
 st.header('Price, Efficiency, and Range of Electric Vehicles')
 
 # Create Text
-st.markdown('Welcome to the electric vehicle data visualization page! Click the buttons \nand toggle the colors to see how electric vehicles compare across the market.')
+st.markdown('Welcome to the electric vehicle data visualization page! Click the buttons \nand toggle the colors to see how price, efficiency, and range of electric vehicles compare across the market.')
 
 ## CREATE BAR CHARTS 
 # Create a bar chart of average price by brand
