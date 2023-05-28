@@ -130,9 +130,7 @@ elif option == 'Efficiency':
     st.plotly_chart(eff_bar)
 elif option == 'Range':
     st.plotly_chart(range_bar)
-    
-st.markdown('Porsche has the highest average price. Byton has the highest average efficiency, \nand Tesla has the highest average range.')
-    
+
 
 # CREATE HISTOGRAMS
 # Header for body style
