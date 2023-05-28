@@ -8,7 +8,7 @@ import plotly_express as px
 
 ## READ AND CLEAN DATA
 # Set Application Name
-st.set_page_config(page_title='Electric Vehicle Data Visualizations')
+st.set_page_config(page_title='Electric Vehicle Market')
 
 # Read in dataset
 url = 'https://raw.githubusercontent.com/kellyshreeve/Web-App-Project/main/ElectricCarData_Clean.csv'
@@ -50,6 +50,9 @@ top_brands = ev[(ev['brand']=='Tesla ') | (ev['brand']=='Audi ') | (ev['brand']=
 
 ## CREATE HEADER
 st.header('Price, Efficiency, and Range of Electric Vehicles')
+
+# Create Text
+st.text('Welcome to the electric vehicle data visualization page. The graphics on this site were created from data on the 103 top electric vehicles on the market today. Click the buttons and toggle the colors to see how the cars compare. See what you can learn!')
 
 ## CREATE BAR CHARTS 
 # Create a bar chart of average price by brand
@@ -118,8 +121,9 @@ st.subheader('By Brand')
 
 # Radio Buttons
 option = st.radio(label='Choose characteristic:', options=['Price', 'Efficiency', 'Range'])
-st.write('<style>div.row-widget.stRadio > div{flex-direction:row;}</style>', unsafe_allow_html=True)
+st.write('<style>div.row-widget.stRadio > div{flex-direction:row;}</style>', unsafe_allow_html=True) # Make buttons horizontal
 
+# Displays for radio button options
 if option == 'Price':
     st.plotly_chart(price_bar)
 elif option == 'Efficiency':
@@ -141,7 +145,7 @@ option_2 = st.selectbox('Choose characteristic:', ('Price', 'Efficiency', 'Range
 x_value_hist = (option_2=='Price' and 'price_euro') or (option_2=='Efficiency' and 'efficiency_whkm') or (option_2=='Range' and 'range_km')
 x_label_hist = (option_2=='Price' and 'Price (Euros)') or (option_2=='Efficiency' and 'Efficiency (WhKm)') or (option_2=='Range' and 'Range (Km)')
 
-# Create histograms by body style
+# Create histograms by drop down selection
 body_hist = px.histogram(suv_hatch_sed, title=f'{option_2} by Body Style', x=x_value_hist, color='body_style', 
                           nbins=25, labels={x_value_hist:x_label_hist},
                           color_discrete_sequence=[px.colors.qualitative.Plotly[0],
@@ -167,19 +171,16 @@ st.plotly_chart(body_hist)
 # Header for scatter plot 
 st.subheader('By Price')
 
-# Axis Menus for scatter plot
-x_axis = st.selectbox('X Axis:', ('Efficiency', 'Range', 'Price'))
-y_axis = st.selectbox('Y Axis:', ('Efficiency', 'Range', 'Price'))
+# Drop down nenu for scatter plot
+y_axis = st.selectbox('Y Axis:', ('Efficiency', 'Range'))
 
-x_value_scat = (x_axis=='Price' and 'price_euro') or (x_axis=='Efficiency' and 'efficiency_whkm') or (x_axis=='Range' and 'range_km')
-x_label_scat = (x_axis=='Price' and 'Price (Euros)') or (x_axis=='Efficiency' and 'Efficiency (WhKm)') or (x_axis=='Range' and 'Range (Km)')
+# Create scatter plot from drop down selection
+y_value_scat = (y_axis=='Efficiency' and 'efficiency_whkm') or (y_axis=='Range' and 'range_km')
 
-y_value_scat = (y_axis=='Price' and 'price_euro') or (y_axis=='Efficiency' and 'efficiency_whkm') or (y_axis=='Range' and 'range_km')
 y_label_scat = (y_axis=='Price' and 'Price (Euros)') or (y_axis=='Efficiency' and 'Efficiency (WhKm)') or (y_axis=='Range' and 'Range (Km)')
 
-# Create a scatter plot of efficiency by price
-price_efficiency = px.scatter(data_frame=ev, title=f'{y_axis} vs {x_axis}', x=x_value_scat, y=y_value_scat, 
-           labels={x_value_scat:x_label_scat, y_value_scat:y_label_scat},
+price_efficiency = px.scatter(data_frame=ev, title=f'{y_axis} vs Price', x='price_euros', y=y_value_scat, 
+           labels={'price_euros':'Price (Euros)', y_value_scat:y_label_scat},
            color='brand', width=900, height=500, hover_data=['model'])
 
 price_efficiency.update_layout({
@@ -192,3 +193,6 @@ price_efficiency.update_yaxes(showgrid=False)
 
 # Display scatter plot on website
 st.plotly_chart(price_efficiency)
+
+# Text Footer
+st.text('The graphics on this site are based on specs from 103 of the top electric vehicles on the market today')
