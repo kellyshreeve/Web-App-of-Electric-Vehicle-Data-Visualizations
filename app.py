@@ -8,7 +8,7 @@ import plotly_express as px
 
 ## READ AND CLEAN DATA
 # Set Application Name
-st.set_page_config(page_title='Electric Vehicle Market')
+st.set_page_config(page_title='Electric Vehicle Data Visualizations')
 
 # Read in dataset
 url = 'https://raw.githubusercontent.com/kellyshreeve/Web-App-Project/main/ElectricCarData_Clean.csv'
@@ -52,7 +52,7 @@ top_brands = ev[(ev['brand']=='Tesla ') | (ev['brand']=='Audi ') | (ev['brand']=
 st.header('Price, Efficiency, and Range of Electric Vehicles')
 
 # Create Text
-st.text('Welcome to the electric vehicle data visualization page. The graphics on this site \nwere created from data on the 103 top electric vehicles on the market today. Click the buttons and toggle the colors to see how the cars compare.')
+st.text('Welcome to the electric vehicle data visualization page. The graphics on this site \nwere created from data on the 103 top electric vehicles on the market. They display \nthe differences in price, efficiency, and range of electric vehicles between \nbrands, between body style, and how prie is related to efficiency and range on the \nelectric vehicle market today.')
 
 ## CREATE BAR CHARTS 
 # Create a bar chart of average price by brand
@@ -193,6 +193,3 @@ price_efficiency.update_yaxes(showgrid=False)
 
 # Display scatter plot on website
 st.plotly_chart(price_efficiency)
-
-# Text Footer
-st.text('The graphics on this site are based on specs from 103 of the top electric vehicles on the market today')
