@@ -52,7 +52,7 @@ top_brands = ev[(ev['brand']=='Tesla ') | (ev['brand']=='Audi ') | (ev['brand']=
 st.header('Price, Efficiency, and Range of Electric Vehicles')
 
 # Create Text
-st.text('Welcome to the electric vehicle data visualization page. The graphics on this site were created from data on the 103 top electric vehicles on the market today. Click the buttons and toggle the colors to see how the cars compare. See what you can learn!')
+st.text('Welcome to the electric vehicle data visualization page. The graphics on this site \nwere created from data on the 103 top electric vehicles on the market today. Click the buttons and toggle the colors to see how the cars compare.')
 
 ## CREATE BAR CHARTS 
 # Create a bar chart of average price by brand
@@ -179,7 +179,7 @@ y_value_scat = (y_axis=='Efficiency' and 'efficiency_whkm') or (y_axis=='Range' 
 
 y_label_scat = (y_axis=='Price' and 'Price (Euros)') or (y_axis=='Efficiency' and 'Efficiency (WhKm)') or (y_axis=='Range' and 'Range (Km)')
 
-price_efficiency = px.scatter(data_frame=ev, title=f'{y_axis} vs Price', x='price_euros', y=y_value_scat, 
+price_efficiency = px.scatter(data_frame=ev, title=f'{y_axis} vs Price', x='price_euro', y=y_value_scat, 
            labels={'price_euros':'Price (Euros)', y_value_scat:y_label_scat},
            color='brand', width=900, height=500, hover_data=['model'])
 
