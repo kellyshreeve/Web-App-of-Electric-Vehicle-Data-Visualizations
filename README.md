@@ -1,4 +1,4 @@
-# Web-App-Project
+# Web App of Electric Vehicle Data Visualizations
 
 This repository hosts data and code for an interactive, data visualization
 web-app of the electric vehicle market. The data come from an open
