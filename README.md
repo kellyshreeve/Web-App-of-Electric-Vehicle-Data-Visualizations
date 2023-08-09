@@ -1,6 +1,6 @@
 # Web App of Electric Vehicle Data Visualizations
 
-This repository hosts data and code for an interactive, data visualization
+A repository with data and code for an interactive, data visualization
 web-app of the electric vehicle market. The data come from an open
 data source on Kaggle and the web app is produced with the streamlit package
 and run through Render.
