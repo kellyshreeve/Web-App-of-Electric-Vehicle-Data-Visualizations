@@ -50,7 +50,8 @@ top_brands = ev[(ev['brand']=='Tesla ') | (ev['brand']=='Audi ') | (ev['brand']=
 
 
 ## CREATE HEADER
-st.header('Electric Vehicle Market Visualizations by Brand, Body Style, and Price')
+st.header('Electric Vehicle Market Visualizations')
+st.subheader('By Brand, Body Style, and Price')
 
 # Create Text
 st.markdown('Welcome to the electric vehicle data visualization page! Click the buttons \nand toggle the colors to see how price, efficiency, and range of electric vehicles compare across the market.')
@@ -133,7 +134,7 @@ elif option == 'Range':
     st.plotly_chart(range_bar)
 
 
-# CREATE DENSITY PLOTS
+# DENSITY PLOTS
 # Header for body style
 st.subheader('By Body Style')
 
@@ -154,43 +155,22 @@ hist_data = [sedan, suv, hatch]
 group_labels = ['Sedan', 'SUV', 'Hatchback']
 
 
-price_dens = ff.create_distplot(hist_data, group_labels, show_hist=False, show_rug=False,
+density = ff.create_distplot(hist_data, group_labels, show_hist=False, show_rug=False,
                                 colors=[px.colors.qualitative.Plotly[0],
                                         px.colors.qualitative.Plotly[7],
                                         px.colors.qualitative.Plotly[9]])
                                                    
 
-price_dens.update_layout({
+density.update_layout({
     'plot_bgcolor':'rgba(0, 0, 0, 0)',
     'paper_bgcolor':'rgba(0, 0, 0, 0)'
 })
 
-price_dens.update_layout(title=f'{option_2} by Body Style', xaxis_title=x_label_dens, yaxis_title='Percent of Cars')
-price_dens.update_xaxes(showgrid=False)
-price_dens.update_yaxes(showgrid=False)
+density.update_layout(title=f'{option_2} by Body Style', xaxis_title=x_label_dens, yaxis_title='Percent of Body Type')
+density.update_xaxes(showgrid=False)
+density.update_yaxes(showgrid=False)
 
-st.plotly_chart(price_dens)
-
-# body_hist = px.histogram(suv_hatch_sed, title=f'{option_2} by Body Style', x=x_value_hist, color='body_style', 
-#                           nbins=25, labels={x_value_hist:x_label_hist},
-#                           color_discrete_sequence=[px.colors.qualitative.Plotly[0],
-#                                                    px.colors.qualitative.Plotly[7],
-#                                                    px.colors.qualitative.Plotly[9]],
-#                           width=800, height=500)
-                                                   
-
-# body_hist.update_layout({
-#     'plot_bgcolor':'rgba(0, 0, 0, 0)',
-#     'paper_bgcolor':'rgba(0, 0, 0, 0)'
-# })
-
-# body_hist.update_layout(barmode='overlay')
-# body_hist.update_traces(opacity=0.7)
-
-# body_hist.update_xaxes(showgrid=False)
-# body_hist.update_yaxes(showgrid=False)
-
-# st.plotly_chart(body_hist)
+st.plotly_chart(density)
 
 # CREATE SCATTER PLOTS
 # Header for scatter plot 
