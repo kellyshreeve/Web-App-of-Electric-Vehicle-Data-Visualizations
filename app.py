@@ -50,7 +50,7 @@ top_brands = ev[(ev['brand']=='Tesla ') | (ev['brand']=='Audi ') | (ev['brand']=
 
 
 ## CREATE HEADER
-st.header('Electric Vehicle Market Visualizations')
+st.header('Electric Vehicle Market')
 
 # Create Text
 st.markdown('Welcome to the electric vehicle data visualization page! Click the buttons \nand toggle the colors to see how price, efficiency, and range of electric vehicles compare across the market.')
