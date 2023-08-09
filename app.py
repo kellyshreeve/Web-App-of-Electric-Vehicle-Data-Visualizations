@@ -95,7 +95,7 @@ eff_bar.update_layout(xaxis={'categoryorder':'array', 'categoryarray':
 eff_bar.update_xaxes(showgrid=False)
 eff_bar.update_yaxes(range=[0,250], showgrid=False) # Set y axis range
 
-# Create bar chart of average range by brand
+# Bar chart of average range by brand
 range_bar = px.histogram(top_brands, x='brand', y='range_km', histfunc='avg', 
                          title='Average Range by Brand', text_auto='.2s',
                          labels={'range_km':'Range (Km)', 'brand':'Brand Name'},
@@ -132,40 +132,62 @@ elif option == 'Range':
     st.plotly_chart(range_bar)
 
 
-# CREATE HISTOGRAMS
+# CREATE DENSITY PLOTS
 # Header for body style
 st.subheader('By Body Style')
-
-# Create data frame with only top 3 body styles
-suv_hatch_sed = ev[(ev['body_style']=='SUV') | (ev['body_style']=='Hatchback') | (ev['body_style']=='Sedan')]
 
 # Drop down menu 
 option_2 = st.selectbox('Choose characteristic:', ('Price', 'Efficiency', 'Range'))
 
-x_value_hist = (option_2=='Price' and 'price_euro') or (option_2=='Efficiency' and 'efficiency_whkm') or (option_2=='Range' and 'range_km')
-x_label_hist = (option_2=='Price' and 'Price (Euros)') or (option_2=='Efficiency' and 'Efficiency (WhKm)') or (option_2=='Range' and 'Range (Km)')
+x_value_dens = (option_2=='Price' and 'price_euro') or (option_2=='Efficiency' and 'efficiency_whkm') or (option_2=='Range' and 'range_km')
+x_label_dens = (option_2=='Price' and 'Price (Euros)') or (option_2=='Efficiency' and 'Efficiency (WhKm)') or (option_2=='Range' and 'Range (Km)')
 
 # Create histograms by drop down selection
-body_hist = px.histogram(suv_hatch_sed, title=f'{option_2} by Body Style', x=x_value_hist, color='body_style', 
-                          nbins=25, labels={x_value_hist:x_label_hist},
-                          color_discrete_sequence=[px.colors.qualitative.Plotly[0],
+suv = suv_hatch_sed[suv_hatch_sed['body_style']=='SUV'][x_value_dens]
+hatch = suv_hatch_sed[suv_hatch_sed['body_style']=='Hatchback'][x_value_dens]
+sedan = suv_hatch_sed[suv_hatch_sed['body_style']=='Sedan'][x_value_dens]
+
+hist_data = [sedan, suv, hatch]
+group_labels = ['Sedan', 'SUV', 'Hatchback']
+
+
+price_dens = ff.create_distplot(hist_data, group_labels, show_hist=False, show_rug=False,
+                                colors=[px.colors.qualitative.Plotly[0],
                                                    px.colors.qualitative.Plotly[7],
-                                                   px.colors.qualitative.Plotly[9]],
-                          width=800, height=500)
+                                                   px.colors.qualitative.Plotly[9]])
                                                    
 
-body_hist.update_layout({
+price_dens.update_layout({
     'plot_bgcolor':'rgba(0, 0, 0, 0)',
     'paper_bgcolor':'rgba(0, 0, 0, 0)'
 })
 
-body_hist.update_layout(barmode='overlay')
-body_hist.update_traces(opacity=0.7)
+price_dens.update_layout(title=f'{option_2} by Body Style', xaxis_title=x_lable_dens, yaxis_title='Percent of Cars')
+price_dens.update_xaxes(showgrid=False)
+price_dens.update_yaxes(showgrid=False)
 
-body_hist.update_xaxes(showgrid=False)
-body_hist.update_yaxes(showgrid=False)
+st.plotly_chart(price_dens)
 
-st.plotly_chart(body_hist)
+# body_hist = px.histogram(suv_hatch_sed, title=f'{option_2} by Body Style', x=x_value_hist, color='body_style', 
+#                           nbins=25, labels={x_value_hist:x_label_hist},
+#                           color_discrete_sequence=[px.colors.qualitative.Plotly[0],
+#                                                    px.colors.qualitative.Plotly[7],
+#                                                    px.colors.qualitative.Plotly[9]],
+#                           width=800, height=500)
+                                                   
+
+# body_hist.update_layout({
+#     'plot_bgcolor':'rgba(0, 0, 0, 0)',
+#     'paper_bgcolor':'rgba(0, 0, 0, 0)'
+# })
+
+# body_hist.update_layout(barmode='overlay')
+# body_hist.update_traces(opacity=0.7)
+
+# body_hist.update_xaxes(showgrid=False)
+# body_hist.update_yaxes(showgrid=False)
+
+# st.plotly_chart(body_hist)
 
 # CREATE SCATTER PLOTS
 # Header for scatter plot 
