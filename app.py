@@ -5,6 +5,7 @@ import pandas as pd
 import numpy as np
 import streamlit as st
 import plotly_express as px
+import plotly.figure_factory as ff
 
 ## READ AND CLEAN DATA
 # Set Application Name
@@ -143,9 +144,11 @@ x_value_dens = (option_2=='Price' and 'price_euro') or (option_2=='Efficiency' a
 x_label_dens = (option_2=='Price' and 'Price (Euros)') or (option_2=='Efficiency' and 'Efficiency (WhKm)') or (option_2=='Range' and 'Range (Km)')
 
 # Create histograms by drop down selection
-suv = ev[ev['body_style']=='SUV'][x_value_dens]
-hatch = ev[ev['body_style']=='Hatchback'][x_value_dens]
-sedan = ev[ev['body_style']=='Sedan'][x_value_dens]
+suv_hatch_sed = ev[(ev['body_style']=='SUV') | (ev['body_style']=='Hatchback') | (ev['body_style']=='Sedan')]  
+
+suv = suv_hatch_sed[suv_hatch_sed['body_style']=='SUV'][x_value_dens]
+hatch = suv_hatch_sed[suv_hatch_sed['body_style']=='Hatchback'][x_value_dens]
+sedan = suv_hatch_sed[suv_hatch_sed['body_style']=='Sedan'][x_value_dens]
 
 hist_data = [sedan, suv, hatch]
 group_labels = ['Sedan', 'SUV', 'Hatchback']
@@ -153,8 +156,8 @@ group_labels = ['Sedan', 'SUV', 'Hatchback']
 
 price_dens = ff.create_distplot(hist_data, group_labels, show_hist=False, show_rug=False,
                                 colors=[px.colors.qualitative.Plotly[0],
-                                                   px.colors.qualitative.Plotly[7],
-                                                   px.colors.qualitative.Plotly[9]])
+                                        px.colors.qualitative.Plotly[7],
+                                        px.colors.qualitative.Plotly[9]])
                                                    
 
 price_dens.update_layout({
@@ -162,7 +165,7 @@ price_dens.update_layout({
     'paper_bgcolor':'rgba(0, 0, 0, 0)'
 })
 
-price_dens.update_layout(title=f'{option_2} by Body Style', xaxis_title=x_lable_dens, yaxis_title='Percent of Cars')
+price_dens.update_layout(title=f'{option_2} by Body Style', xaxis_title=x_label_dens, yaxis_title='Percent of Cars')
 price_dens.update_xaxes(showgrid=False)
 price_dens.update_yaxes(showgrid=False)
 
