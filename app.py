@@ -143,9 +143,9 @@ x_value_dens = (option_2=='Price' and 'price_euro') or (option_2=='Efficiency' a
 x_label_dens = (option_2=='Price' and 'Price (Euros)') or (option_2=='Efficiency' and 'Efficiency (WhKm)') or (option_2=='Range' and 'Range (Km)')
 
 # Create histograms by drop down selection
-suv = suv_hatch_sed[suv_hatch_sed['body_style']=='SUV'][x_value_dens]
-hatch = suv_hatch_sed[suv_hatch_sed['body_style']=='Hatchback'][x_value_dens]
-sedan = suv_hatch_sed[suv_hatch_sed['body_style']=='Sedan'][x_value_dens]
+suv = ev[ev['body_style']=='SUV'][x_value_dens]
+hatch = ev[ev['body_style']=='Hatchback'][x_value_dens]
+sedan = ev[ev['body_style']=='Sedan'][x_value_dens]
 
 hist_data = [sedan, suv, hatch]
 group_labels = ['Sedan', 'SUV', 'Hatchback']
